@@ -10,7 +10,8 @@ jobs:
         permissions:
             contents: read
             packages: write
-        steps:
+        steps:ls
+        
           - name: checkout code 
             uses:  actions/checkout@v3
           - name: setup java and maven 
