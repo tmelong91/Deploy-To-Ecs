@@ -10,8 +10,13 @@
 </head>
 <body>
 <h1 align="center">Welcome to Xashy Web Application Project.</h1>
-<h1 align="center">We are developing an application for Xashy. We are using ECS as the platform of the application.
-we offer AWS and DevOps training and our next class starts in August 2nd </h1>
+<h1 align="center">Welcome to Xashy Tech, your go-to destination for cutting-edge educational solutions in Maryland, USA. At Xashy Tech, we are committed to revolutionizing the way students learn and engage with technology. Whether you are a student, educator, or technology enthusiast, our school web app offers a dynamic platform designed to enhance your educational journey.
+
+	With a passion for innovation and a focus on excellence, Xashy Tech provides a wide range of educational resources, interactive tools, and personalized learning experiences. Our dedicated team of educators and tech experts collaborate to create an immersive environment that fosters curiosity, creativity, and critical thinking.
+	
+	Explore our comprehensive collection of courses, workshops, and educational content tailored to meet the diverse needs of learners at all levels. From programming and robotics to artificial intelligence and beyond, Xashy Tech empowers you to unlock your full potential in the world of technology.
+	
+	Join us on this exciting journey as we bridge the gap between education and technology, transforming the way we learn and shaping a brighter future for all. Let's embark on an inspiring adventure of knowledge and discovery together at Xashy Tech, where innovation meets education in the heart of Maryland, USA. </h1>
 <hr>
 <br>
 	<h1><h3> Server Side IP Address </h3><br>
