@@ -21,50 +21,9 @@ jobs:
           - name: package with maven
             run:  mvn package
           - name: code analysis with sonarqube 
-            run: mvn sonar:sonar -Dsonar.projectKey=xashy-web-project -Dsonar.host.url=http://35.155.206.189:9000 -Dsonar.token=569078e0884dce8d1e6b3d09fd312b57c1d35871
+            run: mvn sonar:sonar -Dsonar.projectKey=xashy-web-app -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} -Dsonar.token=${{secrets.SONAR_LOGIN_TOKEN}}
                 #mvn sonar:sonar -Dsonar.projectKey=xashy-web-project -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} -Dsonar.token=${{secrets.SONAR_LOGIN_TOKEN}}
           - name: upload to github packages
             run: mvn --batch-mode deploy
             env:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} 
-          - name: authhenticate to aws account
-            uses: aws-actions/configure-aws-credentials@v1
-            with:
-                aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
-                aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}} 
-                aws-region: ${{secrets.AWS_REGION}}   
-                
-          - name: login to Amazon ECR
-            id: login-ecr
-            uses: aws-actions/amazon-ecr-login@v1
-          - name: Build , tag and push to ECR
-            id: build-image
-            env:
-                REGISTRY: ${{steps.login-ecr.outputs.registry}}  
-                REPOSITORY: xashy-webapp
-                IMAGE_TAG: ${{github.sha}}
-                
-            run: |
-              docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG . 
-              docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-              echo "image=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT 
-
-          - name: Deploy a new revision of the task-definition
-            id: task-def
-            uses: aws-actions/amazon-ecs-render-task-definition@v1
-            with: 
-                task-definition: task-definition.json 
-                container-name: xashy-webapp 
-                image:  ${{ steps.build-image.outputs.image }}
-
-          - name: Deploy Amazon ECS task definition
-            uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-            with:
-                  task-definition: ${{ steps.task-def.outputs.task-definition }}
-                  service: xashy-webapp-service 
-                  cluster: xashy-webapp-cluster
-                  wait-for-service-stability: true      
-               
- ####  This the end of the file ###
-                
-      
